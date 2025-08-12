@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Harts Road Gazelle</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="breaking-news" id="breakingNews">
+        <div class="container">
+            <span class="alert-icon">⚠️</span>
+            <span class="breaking-text">BREAKING:</span>
+            <span class="news-text">Major Storm System Approaching - Residents advised to prepare for heavy rainfall</span>
+            <button class="close-btn" onclick="closeBreakingNews()">×</button>
+        </div>
+    </div>
+
+    <header>
+        <div class="top-bar">
+            <div class="container">
+                <p class="date" id="currentDate"></p>
+                <div class="secondary-links">
+                    <a href="#">Subscribe</a>
+                    <a href="#">Sign In</a>
+                    <a href="#">Contact Us</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-header container">
+            <div class="logo">
+                <h1>The Harts Road <span>Gazelle</span></h1>
+                <p class="tagline">Reporting with swift precision since 2025</p>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search articles...">
+                <button>🔍</button>
+            </div>
+        </div>
+
+        <nav>
+            <div class="container">
+                <ul>
+                    <li><a href="index.html">Home</a> <hr color="red"></li>
+                    <li><a href="Local/Local.html">Local</a></li>
+                    <li><a href="business.html">Business</a></li>
+                    <li><a href="#">Sports</a></li>
+                    <li><a href="#">Opinion</a></li>
+                    <li><a href="#">Weather</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <article class="featured-article">
+            <img src="https://images.pexels.com/photos/1170412/pexels-photo-1170412.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Community Center">
+            <div class="article-content">
+                <span class="category">Featured</span>
+                <h2>Local Council Approves New Community Center</h2>
+                <p>The $320 million facility will feature a library, gym, attack helicopter, and meeting spaces for residents.</p>
+                <div class="article-meta">
+                    <span class="author">Jacob Zheng</span>
+                    <span class="date">August 12, 2025</span>
+                </div>
+            </div>
+        </article> 
+
+        <div class="content-grid">
+            <section class="main-content">
+                <h2 class="section-title">Local News</h2>
+                
+                <div class="article-grid">
+                    
+                    <article class="article-card"><a href="Local/articles/article1.html">
+                        <img src="https://images.pexels.com/photos/440731/pexels-photo-440731.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Local Farm">
+                        <div class="card-content">
+                            <span class="category">Local</span> 
+                            <h3>Local Farm's Innovative Irrigation System Reduces Water Usage by 400%</h3>
+                            <p>This sustainable approach could put more farmers above the average sustainability index.</p>
+                            <div class="article-meta">
+                                <span class="author">Jacob Zheng</span>
+                                <span class="date">May 8, 2025</span>
+                            </div>
+                        </div>
+                    </article> </a>
+                    <!-- More article cards would go here -->
+                </div>
+            </section>
+
+            <aside class="sidebar">
+                <div class="weather-widget">
+                    <h3>Today's Weather</h3>
+                    <div class="weather-content">
+                        <div class="temperature">200°C</div>
+                        <div class="condition">Partly Cloudy</div>
+                        <div class="details">
+                            <span>Humidity: 45%</span>
+                            <span>Wind: 8 mph</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="newsletter-signup">
+                    <h3>Subscribe to Our Newsletter</h3>
+                    <p>Get the latest news delivered directly to your inbox.</p>
+                    <form>
+                        <input type="email" placeholder="Your email address">
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>About Us</h3>
+                    <p>The Harts Road Gazelle has been the trusted source of news and information for our community since 2025.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Sections</h3>
+                    <ul>
+                        <li><a href="#">Local News</a></li>
+                        <li><a href="#">Business</a></li>
+                        <li><a href="#">Sports</a></li>
+                        <li><a href="#">Opinion</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><a href="aboutUs.html">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Advertise</a></li>
+                        <li><a href="#">Subscribe</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 The Harts Road Gazelle. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
