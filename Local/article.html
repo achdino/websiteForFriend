@@ -33,9 +33,9 @@
         <nav>
             <div class="container">
                 <ul>
-                    <li><a href="../../index.html">Home</a></li>
-                    <li><a href="../Local.html">Local</a> <hr color="red"></li>
-                    <li><a href="../../business.html">Business</a></li>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="Local.html">Local</a> <hr color="red"></li>
+                    <li><a href="../business.html">Business</a></li>
                     <li><a href="#">Sports</a></li>
                     <li><a href="#">Opinion</a></li>
                     <li><a href="#">Weather</a></li>
@@ -73,9 +73,9 @@
             const articleCard = document.createElement("article");
             articleCard.innerHTML = `
               <div class="container">
+                <img src="${article.ImageURL}" alt="${article.Title}" style="max-wIdth:100%;height:auto;">
                 <h1>${article.Title}</h1>
                 <span class="category">${article.Tags}</span>
-                <img src="${article.ImageURL}" alt="${article.Title}" style="max-wIdth:100%;height:auto;">
                 <p>${article.Body}</p>
                 <div class="article-meta">
                   <span class="author">${article.Author || 'Unknown Author'}</span>
