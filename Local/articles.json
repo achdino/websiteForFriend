@@ -1,0 +1,32 @@
+[
+    {
+        "Id": 1,
+        "ImageURL": "Here is a URL",
+        "Title": "Here is a title", 
+        "Tags": "Here is a tag",
+        "Body": "here is the body of the article",
+        "Author": "Jacob Zheng",
+        "Date": "13 August 2025",
+        "Link": "articles/article1.html"
+    },
+    {
+        "Id": 2,
+        "ImageURL": "Here is a URL",
+        "Title": "Here is a title", 
+        "Tags": "Here is a tag",
+        "Body": "here is the body of the article",
+        "Author": "Jacob Zheng",
+        "Date": "13 August 2025",
+        "Link": "articles/article1.html"
+    },    
+    {
+        "Id": 3,
+        "ImageURL": "Here is a URL",
+        "Title": "Here is a title", 
+        "Tags": "Here is a tag",
+        "Body": "here is the body of the article",
+        "Author": "Jacob Zheng",
+        "Date": "13 August 2025",
+        "Link": "articles/article1.html"
+    }
+]
