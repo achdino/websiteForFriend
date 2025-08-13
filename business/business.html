@@ -43,5 +43,40 @@
             </div>
         </nav>
     </header>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Display current date
+        document.getElementById("currentDate").textContent =
+          new Date().toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    
+        // Fetch and load articles
+        fetch("articles.json")
+          .then(response => response.json())
+          .then(data => {
+            const container = document.getElementById("articleGrid");
+            data.forEach(article => {
+              const articleCard = document.createElement("article");
+              articleCard.classList.add("article-card");
+              articleCard.innerHTML = `
+                <a href="${`article.html?Id=${article.Id}` || '#'}">
+                  <img src="${article.ImageURL}" alt="${article.Title}">
+                  <div class="card-content">
+                    <span class="category">${article.Tags}</span>
+                    <h3>${article.Title}</h3>
+                    <p>${article.Body.length > 120 ? article.Body.substring(0, 120) + '...' : article.Body}</p>
+                    <div class="article-meta">
+                      <span class="author">${article.Author || 'Unknown Author'}</span>
+                      <span class="date">${article.Date || ''}</span>
+                    </div>
+                  </div>
+                </a>
+              `;
+              container.appendChild(articleCard);
+            });
+          })
+          .catch(error => console.error("Error loading JSON:", error));
+      });
+  </script>
   </body>
 </html>
+
