@@ -43,35 +43,45 @@
             </div>
         </nav>
     </header>
+    
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         // Display current date
         document.getElementById("currentDate").textContent =
           new Date().toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-
-        // Fetch and load articles
+    
+        // Fetch and load the specific article
         fetch("../articles.json")
           .then(response => response.json())
           .then(data => {
-            
-            data.forEach(article => {
-              const articleCard = document.createElement("article");
-              articleCard.innerHTML = ` 
+            // Find the article with id 1
+            const article = data.find(a => a.id === 1);
+    
+            if (!article) {
+              console.error("Article with ID 1 not found");
+              return;
+            }
+    
+            const articleCard = document.createElement("article");
+            articleCard.innerHTML = `
               <div class="container">
-                <h3>${article.Title}</h3>
+                <h1>${article.Title}</h1>
                 <span class="category">${article.Tags}</span>
-                <p>${article.Body.length > 120 ? article.Body.substring(0, 120) + '...' : article.Body}</p>
+                <p>${article.Body}</p>
                 <div class="article-meta">
-                <span class="author">${article.Author || 'Unknown Author'}</span>
-                <span class="date">${article.Date || ''}</span>
+                  <span class="author">${article.Author || 'Unknown Author'}</span>
+                  <span class="date">${article.Date || ''}</span>
+                </div>
               </div>
-              `;
-              
-            });
+            `;
+    
+            document.body.appendChild(articleCard);
           })
           .catch(error => console.error("Error loading JSON:", error));
       });
     </script>
+
+    
 
     </body>
 </html>
