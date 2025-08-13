@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="wIdth=device-wIdth, initial-scale=1.0">
+    <title>Article1 | Harts Road Gazette</title>
+    <link rel="stylesheet" href="../../styles.css">
+  </head>
+  <body>
+        <header>
+        <div class="top-bar">
+            <div class="container">
+                <p class="date" Id="currentDate"></p>
+                <div class="secondary-links">
+                    <a href="#">Subscribe</a>
+                    <a href="#">Sign In</a>
+                    <a href="#">Contact Us</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-header container">
+            <div class="logo">
+                <h1>The Harts Road <span>Gazette</span></h1>
+                <p class="tagline">Reporting with swift precision since 2025</p>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search articles...">
+                <button>🔍</button>
+            </div>
+        </div>
+
+        <nav>
+            <div class="container">
+                <ul>
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../Local.html">Local</a> <hr color="red"></li>
+                    <li><a href="../../business.html">Business</a></li>
+                    <li><a href="#">Sports</a></li>
+                    <li><a href="#">Opinion</a></li>
+                    <li><a href="#">Weather</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Display current date
+        document.getElementById("currentDate").textContent =
+          new Date().toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+        // Get the article Id from the URL
+        const params = new URLSearchParams(window.location.search);
+        const articleId = parseInt(params.get("Id"), 10);
+
+        if (isNaN(articleId)) {
+          console.error("No valId article Id in URL");
+          return;
+        }
+
+        // Fetch and load the specific article
+        fetch("../articles.json")
+          .then(response => response.json())
+          .then(data => {
+            // Find the matching article by Id
+            const article = data.find(a => a.Id === articleId);
+
+            if (!article) {
+              console.error(`Article with Id ${articleId} not found`);
+              return;
+            }
+
+            const articleCard = document.createElement("article");
+            articleCard.innerHTML = `
+              <div class="container">
+                <h1>${article.Title}</h1>
+                <span class="category">${article.Tags}</span>
+                <img src="${article.ImageURL}" alt="${article.Title}" style="max-wIdth:100%;height:auto;">
+                <p>${article.Body}</p>
+                <div class="article-meta">
+                  <span class="author">${article.Author || 'Unknown Author'}</span>
+                  <span class="date">${article.Date || ''}</span>
+                </div>
+              </div>
+            `;
+
+            document.body.appendChild(articleCard);
+          })
+          .catch(error => console.error("Error loading JSON:", error));
+      });
+    </script>
+
+
+    </body>
+</html>
