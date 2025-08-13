@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="wIdth=device-wIdth, initial-scale=1.0">
     <title>Article1 | Harts Road Gazette</title>
     <link rel="stylesheet" href="../../styles.css">
   </head>
@@ -10,7 +10,7 @@
         <header>
         <div class="top-bar">
             <div class="container">
-                <p class="date" id="currentDate"></p>
+                <p class="date" Id="currentDate"></p>
                 <div class="secondary-links">
                     <a href="#">Subscribe</a>
                     <a href="#">Sign In</a>
@@ -54,11 +54,11 @@
         fetch("../articles.json")
           .then(response => response.json())
           .then(data => {
-            // Find the article with id 1
-            const article = data.find(a => a.id === 1);
+            // Find the article with Id 1
+            const article = data.find(a => a.Id === 1);
     
             if (!article) {
-              console.error("Article with ID 1 not found");
+              console.error("Article with Id 1 not found");
               return;
             }
     
