@@ -1,67 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Local | Harts Road Gazette</title>
-    <link rel="stylesheet" href="../styles.css">
-  </head>
-  <body>
-        <header>
-        <div class="top-bar">
-            <div class="container">
-                <p class="date" id="currentDate"></p>
-                <div class="secondary-links">
-                    <a href="#">Subscribe</a>
-                    <a href="#">Sign In</a>
-                    <a href="#">Contact Us</a>
-                </div>
-            </div>
-        </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Local | Harts Road Gazette</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<header>
+  <div class="top-bar">
+    <div class="container">
+      <p class="date" id="currentDate"></p>
+      <div class="secondary-links">
+        <a href="#">Subscribe</a>
+        <a href="#">Sign In</a>
+        <a href="#">Contact Us</a>
+      </div>
+    </div>
+  </div>
 
-        <div class="main-header container">
-            <div class="logo">
-                <h1>The Harts Road <span>Gazette</span></h1>
-                <p class="tagline">Reporting with swift precision since 2025</p>
-            </div>
-            <div class="search-bar">
-                <input type="text" placeholder="Search articles...">
-                <button>🔍</button>
-            </div>
-        </div>
+  <div class="main-header container">
+    <div class="logo">
+      <h1>The Harts Road <span>Gazette</span></h1>
+      <p class="tagline">Reporting with swift precision since 2025</p>
+    </div>
+    <div class="search-bar">
+      <input type="text" placeholder="Search articles...">
+      <button>🔍</button>
+    </div>
+  </div>
 
-        <nav>
-            <div class="container">
-                <ul>
-                    <li><a href="../index.html">Home</a></li>
-                    <li><a href="Local.html">Local</a> <hr color="red"></li>
-                    <li><a href="../business.html">Business</a></li>
-                    <li><a href="#">Sports</a></li>
-                    <li><a href="#">Opinion</a></li>
-                    <li><a href="#">Weather</a></li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-            <div class="content-grid">
-            <section class="main-content">
-                <h2 class="section-title">Local News</h2>
-                
-                <div class="article-grid">
-                    
-                    <article class="article-card"><a href="articles/article1.html">
-                        <img src="https://images.pexels.com/photos/440731/pexels-photo-440731.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Local Farm">
-                        <div class="card-content">
-                            <span class="category">Local</span> 
-                            <h3>Local Farm's Innovative Irrigation System Reduces Water Usage by 400%</h3>
-                            <p>This sustainable approach could put more farmers above the average sustainability index.</p>
-                            <div class="article-meta">
-                                <span class="author">Jacob Zheng</span>
-                                <span class="date">May 8, 2025</span>
-                            </div>
-                        </div>
-                    </article> </a>
-                    <!-- More article cards would go here -->
+  <nav>
+    <div class="container">
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="Local.html">Local</a> <hr color="red"></li>
+        <li><a href="../business.html">Business</a></li>
+        <li><a href="#">Sports</a></li>
+        <li><a href="#">Opinion</a></li>
+        <li><a href="#">Weather</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<div class="content-grid">
+  <section class="main-content">
+    <h2 class="section-title">Local News</h2>
+    <div class="article-grid" id="articleGrid">
+      <!-- Articles will be loaded here -->
+    </div>
+  </section>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Display current date
+    document.getElementById("currentDate").textContent =
+      new Date().toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+    // Fetch and load articles
+    fetch("localNews.json")
+      .then(response => response.json())
+      .then(data => {
+        const container = document.getElementById("articleGrid");
+        data.forEach(article => {
+          const articleCard = document.createElement("article");
+          articleCard.classList.add("article-card");
+          articleCard.innerHTML = `
+            <a href="${article.Link || '#'}">
+              <img src="${article.ImageURL}" alt="${article.Title}">
+              <div class="card-content">
+                <span class="category">${article.Tags}</span>
+                <h3>${article.Title}</h3>
+                <p>${article.Body.length > 120 ? article.Body.substring(0, 120) + '...' : article.Body}</p>
+                <div class="article-meta">
+                  <span class="author">${article.Author || 'Unknown Author'}</span>
+                  <span class="date">${article.Date || ''}</span>
                 </div>
-  </body>
+              </div>
+            </a>
+          `;
+          container.appendChild(articleCard);
+        });
+      })
+      .catch(error => console.error("Error loading JSON:", error));
+  });
+</script>
+</body>
 </html>
