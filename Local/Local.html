@@ -68,7 +68,7 @@
           const articleCard = document.createElement("article");
           articleCard.classList.add("article-card");
           articleCard.innerHTML = `
-            <a href="${`articles.html?Id=${article.Id}` || '#'}">
+            <a href="${`article.html?Id=${article.Id}` || '#'}">
               <img src="${article.ImageURL}" alt="${article.Title}">
               <div class="card-content">
                 <span class="category">${article.Tags}</span>
