@@ -7,7 +7,8 @@
         "Body": "here is the body of the article",
         "Author": "Jacob Zheng",
         "Date": "13 August 2025",
-        "Link": "articles/article1.html"
+        "Link": "articles/article1.html",
+        "Type": Local
     },
     {
         "Id": 2,
@@ -17,7 +18,8 @@
         "Body": "New farming system premiered by Jacob Zheng's worst performing farm suggests bright new innovations possible in the near future. As said by Jacob Zheng, 'this wonders innovation could help put more [farmers] above the average water sustainability index' consumption. We however, taking a more cynical stance, believe that Jacob Zheng is actually lying! Our mathemeticians have spent hours toiling away, trying to work out how to reduce water consumption by 4000%, where the newly patented system only achieves 1%. Thus, we must conclude this as a lie. Our strong beliefs against fake news make us delete this article in precisely 400 thousand years from now.",
         "Author": "Jacob Zheng",
         "Date": "13 August 2025",
-        "Link": "articles/article1.html"
+        "Link": "articles/article1.html",
+        "Type": Local
     },    
     {
         "Id": 3,
@@ -28,5 +30,6 @@
         "Author": "Jacob Zheng",
         "Date": "13 August 2025",
         "Link": "articles/article1.html"
+        "Type": Local
     }
 ]
