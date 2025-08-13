@@ -60,7 +60,7 @@
       new Date().toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 
     // Fetch and load articles
-    fetch("localNews.json")
+    fetch("articles.json")
       .then(response => response.json())
       .then(data => {
         const container = document.getElementById("articleGrid");
