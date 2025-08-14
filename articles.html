@@ -58,30 +58,35 @@
     // Display current date
     document.getElementById("currentDate").textContent =
       new Date().toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-
-    // Fetch and load articles
-    fetch("Local/articles.json")
-      .then(response => response.json())
-      .then(data => {
-        
-
-            const articleCard = document.createElement("article");
-            articleCard.innerHTML = `
-              <div class="container">
-                <h1>${article.Title}</h1>
-                <span class="category">${article.Tags}</span>
-                <p>${article.Body}</p>
-                <div class="article-meta">
-                  <span class="author">${article.Author || 'Unknown Author'}</span>
-                  <span class="date">${article.Date || ''}</span>
-                </div>
-              </div>
-            `;
-    
-
-          )
-          .catch(error => console.error("Error loading JSON:", error));
-      };
+        try {
+          // Fetch and load articles
+          fetch("Local/articles.json")
+            .then(response => response.json())
+            .then(data => {
+              const articleGrid = document.getElementById("articleGrid");
+              data.forEach(article => {
+                const articleCard = document.createElement("article");
+                articleCard.innerHTML = `
+                  <div class="container">
+                    <h1>${article.Title}</h1>
+                    <span class="category">${article.Tags}</span>
+                    <p>${article.Body}</p>
+                    <div class="article-meta">
+                      <span class="author">${article.Author || 'Unknown Author'}</span>
+                      <span class="date">${article.Date || ''}</span>
+                    </div>
+                  </div>
+                `;
+                articleGrid.appendChild(articleCard);
+              });
+            })
+            .catch(error => {
+              console.error("Error loading JSON:", error);
+            });
+        } catch (error) {
+          console.error("Error in script:", error);
+        }
+      });
     </script>
 </body>
 </html>
