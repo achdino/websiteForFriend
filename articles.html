@@ -57,36 +57,57 @@
   document.addEventListener("DOMContentLoaded", () => {
     // Display current date
     document.getElementById("currentDate").textContent =
-      new Date().toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-        try {
-          // Fetch and load articles
-          fetch("Local/articles.json")
-            .then(response => response.json())
-            .then(data => {
-              const articleGrid = document.getElementById("articleGrid");
-              data.forEach(article => {
-                const articleCard = document.createElement("article");
-                articleCard.innerHTML = `
-                  <div class="container">
-                    <h1>${article.Title}</h1>
-                    <span class="category">${article.Tags}</span>
-                    <p>${article.Body}</p>
-                    <div class="article-meta">
-                      <span class="author">${article.Author || 'Unknown Author'}</span>
-                      <span class="date">${article.Date || ''}</span>
-                    </div>
-                  </div>
-                `;
-                articleGrid.appendChild(articleCard);
-              });
-            })
-            .catch(error => {
-              console.error("Error loading JSON:", error);
-            });
-        } catch (error) {
-          console.error("Error in script:", error);
-        }
+      new Date().toLocaleDateString(undefined, {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
       });
-    </script>
+
+    try {
+      // Get query parameters from the URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const articleId = urlParams.get("id");
+      const articleType = urlParams.get("type");
+
+      // Fetch and load articles
+      fetch("Local/articles.json")
+        .then(response => response.json())
+        .then(data => {
+          const articleGrid = document.getElementById("articleGrid");
+
+          // Find the matching article where BOTH id and type match
+          const matchedArticle = data.find(article =>
+            String(article.Id) === String(articleId) &&
+            String(article.Type).toLowerCase() === String(articleType).toLowerCase()
+          );
+
+          if (matchedArticle) {
+            const articleCard = document.createElement("article");
+            articleCard.innerHTML = `
+              <div class="container">
+                <h1>${matchedArticle.Title}</h1>
+                <span class="category">${matchedArticle.Tags}</span>
+                <p>${matchedArticle.Body}</p>
+                <div class="article-meta">
+                  <span class="author">${matchedArticle.Author || 'Unknown Author'}</span>
+                  <span class="date">${matchedArticle.Date || ''}</span>
+                </div>
+              </div>
+            `;
+            articleGrid.appendChild(articleCard);
+          } else {
+            articleGrid.innerHTML = `<p>No article found for ID ${articleId} and type "${articleType}".</p>`;
+          }
+        })
+        .catch(error => {
+          console.error("Error loading JSON:", error);
+        });
+    } catch (error) {
+      console.error("Error in script:", error);
+    }
+  });
+</script>
+
 </body>
 </html>
