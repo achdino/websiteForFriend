@@ -8,7 +8,7 @@
         "Author": "Jacob Zheng",
         "Date": "13 August 2025",
         "Link": "articles/article1.html",
-        "Type": Local
+        "Type": "Local"
     },
     {
         "Id": 2,
@@ -19,7 +19,7 @@
         "Author": "Jacob Zheng",
         "Date": "13 August 2025",
         "Link": "articles/article1.html",
-        "Type": Local
+        "Type": "Local"
     },    
     {
         "Id": 3,
@@ -30,6 +30,6 @@
         "Author": "Jacob Zheng",
         "Date": "13 August 2025",
         "Link": "articles/article1.html"
-        "Type": Local
+        "Type": "Local"
     }
 ]
