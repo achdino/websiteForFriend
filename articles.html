@@ -63,29 +63,25 @@
     fetch("Local/articles.json")
       .then(response => response.json())
       .then(data => {
-        const container = document.getElementById("articleGrid");
-        data.forEach(article => {
-          const articleCard = document.createElement("article");
-          articleCard.classList.add("article-card");
-          articleCard.innerHTML = `
-            <a href="${`articles.html?Id=${article.Id}&Type=${article.Type}` || '#'}">
-              <img src="${article.ImageURL}" alt="${article.Title}">
-              <div class="card-content">
+        
+
+            const articleCard = document.createElement("article");
+            articleCard.innerHTML = `
+              <div class="container">
+                <h1>${article.Title}</h1>
                 <span class="category">${article.Tags}</span>
-                <h3>${article.Title}</h3>
-                <p>${article.Body.length > 120 ? article.Body.substring(0, 120) + '...' : article.Body}</p>
+                <p>${article.Body}</p>
                 <div class="article-meta">
                   <span class="author">${article.Author || 'Unknown Author'}</span>
                   <span class="date">${article.Date || ''}</span>
                 </div>
               </div>
-            </a>
-          `;
-          container.appendChild(articleCard);
-        });
-      })
-      .catch(error => console.error("Error loading JSON:", error));
-  });
-</script>
+            `;
+    
+
+          )
+          .catch(error => console.error("Error loading JSON:", error));
+      });
+    </script>
 </body>
 </html>
