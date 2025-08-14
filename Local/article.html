@@ -52,21 +52,26 @@
         // Get the article Id from the URL
         const params = new URLSearchParams(window.location.search);
         const articleId = parseInt(params.get("Id"), 10);
+        const articleType = params.get("Type");
 
         if (isNaN(articleId)) {
           console.error("No valId article Id in URL");
           return;
         }
+        if (isNaN(articleType)) {
+          console.error("No valid article Type in URL");
+          return;
 
         // Fetch and load the specific article
         fetch("articles.json")
           .then(response => response.json())
           .then(data => {
             // Find the matching article by Id
-            const article = data.find(a => a.Id === articleId);
+            const article = data.find(a => a.Id === articleId, a => a.Type === articleType);
 
             if (!article) {
               console.error(`Article with Id ${articleId} not found`);
+              
               return;
             }
 
