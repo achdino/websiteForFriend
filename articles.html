@@ -74,7 +74,7 @@
       fetch("Local/articles.json")
         .then(response => response.json())
         .then(data => {
-          const articleGrid = document.getElementById("articleGrid");
+
 
           // Find the matching article where BOTH id and type match
           const matchedArticle = data.find(article =>
@@ -95,9 +95,9 @@
                 </div>
               </div>
             `;
-            articleGrid.appendChild(articleCard);
+
           } else {
-            articleGrid.innerHTML = `<p>No article found for ID ${articleId} and type "${articleType}".</p>`;
+
           }
         })
         .catch(error => {
