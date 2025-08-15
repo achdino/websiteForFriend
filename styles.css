@@ -297,6 +297,13 @@ footer {
     color: #9ca3af;
 }
 
+.article-fullwidth {
+  width: 100%;
+  max-width: 100%;
+  padding: 20px; 
+}
+
+
 /* Animations */
 @keyframes fadeIn {
     from { opacity: 0; }
