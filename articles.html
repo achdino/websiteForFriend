@@ -99,8 +99,20 @@
             String(article.Id) === String(articleId) &&
             String(article.Type).toLowerCase() === String(articleType).toLowerCase()
           );
-
+    
           if (matchedArticle) {
+            function sanitize(string) {
+              const map = {
+                  '&': '&amp;',
+                  '<': '&lt;',
+                  '>': '&gt;',
+                  '"': '&quot;',
+                  "'": '&#x27;',
+                  "/": '&#x2F;',
+              };
+              const reg = /[&<>"'/]/ig;
+              return string.replace(reg, (match)=>(map[match]));
+            }
             container.innerHTML = `
               <article class="article-fullwidth">
                 <h1>${matchedArticle.Title}</h1>
