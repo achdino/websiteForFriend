@@ -22,14 +22,18 @@
         "Type": "Local"
     },    
     {
-        "Id": 3,
+        "Id": 1,
         "ImageURL": "https://pixabay.com/get/gbf13f7a463a5bfbb4ee8cd91cf7aa8a78167343b48e8504221329db06c63bed13abb9281a9f32eb20fc3f7c932ff21a9fc2fd28a4ba72e334087cd54e4240c69_640.jpg",
-        "Title": "Here is Sam's special article", 
-        "Tags": "Samuel Wu's",
+        "Title": "Here is Sam's Business special article", 
+        "Tags": "Business",
         "Body": "I would like to preface this by stating the majority of stundenplan raps are bad \n Testing \n ",
         "Author": "Jacob Zheng",
         "Date": "13 August 2025",
         "Link": "articles/article1.html",
-        "Type": "Local"
+        "Type": "Business"
+    },
+    {
+        
     }
+    
 ]
