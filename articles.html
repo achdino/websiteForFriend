@@ -5,6 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Local | Harts Road Gazette</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Make article span full width */
+    .article-fullwidth {
+      width: 100%;
+      max-width: 100%;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .article-fullwidth h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .article-fullwidth .category {
+      display: block;
+      font-weight: bold;
+      color: darkred;
+      margin-bottom: 15px;
+    }
+
+    .article-fullwidth .article-meta {
+      margin-top: 20px;
+      font-size: 0.9rem;
+      color: gray;
+    }
+  </style>
 </head>
 <body>
 <header>
@@ -47,8 +74,8 @@
 <div class="content-grid">
   <section class="main-content">
     <h2 class="section-title">Local News</h2>
-    <div class="article-grid" id="articleGrid">
-      <!-- Articles will be loaded here -->
+    <div id="articleContainer">
+      <!-- Single article will be loaded here -->
     </div>
   </section>
 </div>
@@ -65,27 +92,23 @@
       });
 
     try {
-      // Get query parameters from the URL
       const urlParams = new URLSearchParams(window.location.search);
-      const articleId = urlParams.get("id");
-      const articleType = urlParams.get("type");
+      const articleId = urlParams.get("id") || urlParams.get("Id"); // allow both
+      const articleType = urlParams.get("type") || urlParams.get("Type");
 
-      // Fetch and load articles
       fetch("Local/articles.json")
         .then(response => response.json())
         .then(data => {
+          const container = document.getElementById("articleContainer");
 
-
-          // Find the matching article where BOTH id and type match
           const matchedArticle = data.find(article =>
             String(article.Id) === String(articleId) &&
             String(article.Type).toLowerCase() === String(articleType).toLowerCase()
           );
 
           if (matchedArticle) {
-            const articleCard = document.createElement("article");
-            articleCard.innerHTML = `
-              <div class="article-fullwidth">
+            container.innerHTML = `
+              <article class="article-fullwidth">
                 <h1>${matchedArticle.Title}</h1>
                 <span class="category">${matchedArticle.Tags}</span>
                 <p>${matchedArticle.Body}</p>
@@ -93,11 +116,10 @@
                   <span class="author">${matchedArticle.Author || 'Unknown Author'}</span>
                   <span class="date">${matchedArticle.Date || ''}</span>
                 </div>
-              </div>
+              </article>
             `;
-
           } else {
-
+            container.innerHTML = `<p>No article found for ID ${articleId} and type "${articleType}".</p>`;
           }
         })
         .catch(error => {
