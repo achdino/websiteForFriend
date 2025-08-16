@@ -101,28 +101,20 @@
           );
     
           if (matchedArticle) {
-            function sanitize(string) {
-              if (!string) return '';
-              const map = {
-                '&': '&amp;',
-                '<': '&lt;',
-                '>': '&gt;',
-                '"': '&quot;',
-                "'": '&#x27;',
-                "/": '&#x2F;',
-              };
-              const reg = /[&<>"'/]/ig;
-              return String(string).replace(reg, (match) => map[match]);
-            }
-          
+            function htmlEncode(input) {
+              const textArea = document.createElement("textarea");
+              textArea.innerText = input;
+              return textArea.innerHTML.split("<br>").join("\n");
+            } 
+              
             container.innerHTML = `
               <article class="article-fullwidth">
-                <h1>${sanitize(matchedArticle.Title)}</h1>
-                <span class="category">${sanitize(matchedArticle.Tags)}</span>
-                <p>${sanitize(matchedArticle.Body)}</p>
+                <h1>${htmlEncode(matchedArticle.Title)}</h1>
+                <span class="category">${htmlEncode(matchedArticle.Tags)}</span>
+                <p>${htmlEncode(matchedArticle.Body)}</p>
                 <div class="article-meta">
-                  <span class="author">${sanitize(matchedArticle.Author) || 'Unknown Author'}</span>
-                  <span class="date">${sanitize(matchedArticle.Date) || ''}</span>
+                  <span class="author">${htmlEncode(matchedArticle.Author) || 'Unknown Author'}</span>
+                  <span class="date">${htmlEncode(matchedArticle.Date) || ''}</span>
                 </div>
               </article>
             `;
