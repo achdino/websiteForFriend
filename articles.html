@@ -90,7 +90,7 @@
       const articleId = urlParams.get("id") || urlParams.get("Id"); // allow both
       const articleType = urlParams.get("type") || urlParams.get("Type");
 
-      fetch("Local/articles.json")
+      fetch("Local/articles.json?v=2025-08-16")
         .then(response => response.json())
         .then(data => {
           const container = document.getElementById("articleContainer");
