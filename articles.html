@@ -102,28 +102,32 @@
     
           if (matchedArticle) {
             function sanitize(string) {
+              if (!string) return '';
               const map = {
-                  '&': '&amp;',
-                  '<': '&lt;',
-                  '>': '&gt;',
-                  '"': '&quot;',
-                  "'": '&#x27;',
-                  "/": '&#x2F;',
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#x27;',
+                "/": '&#x2F;',
               };
               const reg = /[&<>"'/]/ig;
-              return string.replace(reg, (match)=>(map[match]));
+              return String(string).replace(reg, (match) => map[match]);
             }
+          
             container.innerHTML = `
               <article class="article-fullwidth">
-                <h1>${matchedArticle.Title}</h1>
-                <span class="category">${matchedArticle.Tags}</span>
-                <p>${matchedArticle.Body}</p>
+                <h1>${sanitize(matchedArticle.Title)}</h1>
+                <span class="category">${sanitize(matchedArticle.Tags)}</span>
+                <p>${sanitize(matchedArticle.Body)}</p>
                 <div class="article-meta">
-                  <span class="author">${matchedArticle.Author || 'Unknown Author'}</span>
-                  <span class="date">${matchedArticle.Date || ''}</span>
+                  <span class="author">${sanitize(matchedArticle.Author) || 'Unknown Author'}</span>
+                  <span class="date">${sanitize(matchedArticle.Date) || ''}</span>
                 </div>
               </article>
             `;
+          
+
           } else {
             container.innerHTML = `<p>No article found for ID ${articleId} and type "${articleType}".</p>`;
           }
