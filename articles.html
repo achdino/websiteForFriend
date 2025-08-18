@@ -6,23 +6,55 @@
   <title>Local | Harts Road Gazette</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-    /* Make article span full width */
+    /* Fullwidth article view */
     .article-fullwidth {
       width: 100%;
       max-width: 100%;
       padding: 20px;
       box-sizing: border-box;
     }
-
     .article-fullwidth h1 {
       font-size: 2rem;
       margin-bottom: 10px;
     }
-
-
     .article-fullwidth .article-meta {
       margin-top: 20px;
       font-size: 0.9rem;
+      color: gray;
+    }
+
+    .articleHREF {
+      color: inherit;
+    }
+    
+    /* Grid list view */
+    .article-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .article-card {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .article-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    .card-content {
+      padding: 15px;
+    }
+    .card-content h3 {
+      margin: 0 0 10px;
+      font-size: 1.2rem;
+    }
+    .article-meta {
+      margin-top: 10px;
+      font-size: 0.85rem;
       color: gray;
     }
   </style>
@@ -69,14 +101,14 @@
   <section class="main-content">
     <h2 class="section-title">Local News</h2>
     <div id="articleContainer">
-      <!-- Single article will be loaded here -->
+      <!-- Single article OR list of articles will load here -->
     </div>
   </section>
 </div>
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    // Display current date
+    // Show current date
     document.getElementById("currentDate").textContent =
       new Date().toLocaleDateString(undefined, {
         weekday: 'long',
@@ -85,51 +117,75 @@
         day: 'numeric'
       });
 
-    try {
-      const urlParams = new URLSearchParams(window.location.search);
-      const articleId = urlParams.get("id") || urlParams.get("Id"); // allow both
-      const articleType = urlParams.get("type") || urlParams.get("Type");
+    const urlParams = new URLSearchParams(window.location.search);
+    const articleId = urlParams.get("id") || urlParams.get("Id");
+    const articleType = urlParams.get("type") || urlParams.get("Type");
 
-      fetch("Local/articles.json?v=2025-08-17") // Update every time articles.json changes
-        .then(response => response.json())
-        .then(data => {
-          const container = document.getElementById("articleContainer");
+    fetch("Local/articles.json?v=2025-08-17")
+      .then(response => response.json())
+      .then(data => {
+        const container = document.getElementById("articleContainer");
 
+        // If we have an ID → show single article
+        if (articleId && articleType) {
           const matchedArticle = data.find(article =>
             String(article.Id) === String(articleId) &&
             String(article.Type).toLowerCase() === String(articleType).toLowerCase()
           );
-    
+
           if (matchedArticle) {
-            function htmlEncode(input) {
-              const textArea = document.createElement("textarea");
-              textArea.innerText = input;
-              return textArea.innerHTML.split("<br>").join("\n");
-            } 
-              
             container.innerHTML = `
               <article class="article-fullwidth">
-                <h1>${htmlEncode(matchedArticle.Title)}</h1>
-                <span class="category">${htmlEncode(matchedArticle.Tags)}</span>
-                <p>${htmlEncode(matchedArticle.Body)}</p>
+                <h1>${matchedArticle.Title}</h1>
+                <span class="category">${matchedArticle.Tags}</span>
+                <p>${matchedArticle.Body}</p>
                 <div class="article-meta">
-                  <span class="author">${htmlEncode(matchedArticle.Author) || 'Unknown Author'}</span>
-                  <span class="date">${htmlEncode(matchedArticle.Date) || ''}</span>
+                  <span class="author">${matchedArticle.Author || 'Unknown Author'}</span>
+                  <span class="date">${matchedArticle.Date || ''}</span>
                 </div>
               </article>
             `;
-          
-
           } else {
             container.innerHTML = `<p>No article found for ID ${articleId} and type "${articleType}".</p>`;
           }
-        })
-        .catch(error => {
-          console.error("Error loading JSON:", error);
-        });
-    } catch (error) {
-      console.error("Error in script:", error);
-    }
+
+        // If only type=Local → show grid list
+        } else if (articleType) {
+          const filtered = data.filter(article =>
+            String(article.Type).toLowerCase() === String(articleType).toLowerCase()
+          );
+
+          if (filtered.length > 0) {
+            const grid = document.createElement("div");
+            grid.classList.add("article-grid");
+
+            filtered.forEach(article => {
+              const articleCard = document.createElement("article");
+              articleCard.classList.add("article-card");
+              articleCard.innerHTML = `
+                <a class="articleHREF" href="articles.html?id=${article.Id}&type=${encodeURIComponent(article.Type)}">
+                  <img src="${article.ImageURL}" alt="${article.Title}">
+                  <div class="card-content">
+                    <span class="category">${article.Tags}</span>
+                    <h3>${article.Title}</h3>
+                    <p>${article.Body.length > 120 ? article.Body.substring(0, 120) + '...' : article.Body}</p>
+                    <div class="article-meta">
+                      <span class="author">${article.Author || 'Unknown Author'}</span>
+                      <span class="date">${article.Date || ''}</span>
+                    </div>
+                  </div>
+                </a>
+              `;
+              grid.appendChild(articleCard);
+            });
+
+            container.appendChild(grid);
+          } else {
+            container.innerHTML = `<p>No articles found for type "${articleType}".</p>`;
+          }
+        }
+      })
+      .catch(error => console.error("Error loading JSON:", error));
   });
 </script>
 
