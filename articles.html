@@ -121,7 +121,7 @@
     const articleId = urlParams.get("id") || urlParams.get("Id");
     const articleType = urlParams.get("type") || urlParams.get("Type");
 
-    fetch("Local/articles.json?v=2025-08-17")
+    fetch("Local/articles.json?v=2025-08-19")
       .then(response => response.json())
       .then(data => {
         const container = document.getElementById("articleContainer");
