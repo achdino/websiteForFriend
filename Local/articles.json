@@ -33,7 +33,15 @@
         "Type": "Business"
     },
     {
-        
+        "Id": 4,
+        "ImageURL": "https://pixabay.com/get/gbf13f7a463a5bfbb4ee8cd91cf7aa8a78167343b48e8504221329db06c63bed13abb9281a9f32eb20fc3f7c932ff21a9fc2fd28a4ba72e334087cd54e4240c69_640.jpg",
+        "Title": "Here is Jan's  special article", 
+        "Tags": "Jan's",
+        "Body": "Good day Ladies and Gentlemen, this is Jan's special article. It is a great pleasure to share this with you all. I hope you find it insightful and engaging.",
+        "Author": "Jacob Zheng ",
+        "Date": "13 August 2025",
+        "Link": "articles/article1.html",
+        "Type": "Opinion"
     }
     
 ]
